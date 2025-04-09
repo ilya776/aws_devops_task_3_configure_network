@@ -96,7 +96,7 @@ if ($httpIngressRule.change.after.cidr_ipv4 -eq "0.0.0.0/0") {
     throw "`u{1F635} Unable to validate grafana security group cidr block. Please make sure that the rule allows connections to grafana from any IPs ('0.0.0.0/0') try again. "
 }
 
-$httpsEgressRule = $plan.resource_changes | Where-Object {$_.type -eq "aws_vpc_security_group_egress_rule"} 
+$httpsEgressRule = $plan.resource_changes | Where-Object {$_.type -eq "aws_security_group_rule"}
 if ($httpsEgressRule -and ($httpsEgressRule.Count -eq 1 )) { 
     Write-Output "`u{2705} Checking if the outbound security group rule is present in the plan - OK. "
 } else { 
